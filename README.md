@@ -1,1 +1,1 @@
-This is thr frontend for KTU Activity Points - Miniproject
+This is the frontend for KTU Activity Points - Miniproject
