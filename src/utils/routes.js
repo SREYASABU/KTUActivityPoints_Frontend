@@ -5,6 +5,5 @@ export const apiRoutes = {
 export const pageRoutes = {
     landing: '/',
     login: '/login',
-    register: '/register',
-    profile: '/profile',
+    teacherprofile: '/teacherprofile',
 }

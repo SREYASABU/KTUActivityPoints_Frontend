@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import Navbar from '../layout/Navbar';
-import Profile from '../profile/Profile';
+import Profile from '../profile/TeacherProfile';
 import Spinner from '../layout/Spinner';
 import axios from 'axios';
 

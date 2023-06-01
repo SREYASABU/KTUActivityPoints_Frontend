@@ -1,18 +1,18 @@
-import {Navigate, useLocation} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {pageRoutes} from "./routes";
+// import {Navigate, useLocation} from "react-router-dom";
+// import {useSelector} from "react-redux";
+// import {pageRoutes} from "./routes";
 
-//REDUXXXXXXXXXXXXXXX
+// //REDUXXXXXXXXXXXXXXX
 
-const ProtectedRoute = ({children}) => {
-    const location = useLocation();
-    const authenticated = useSelector((state) => state.auth.authenticated)
+// const ProtectedRoute = ({children}) => {
+//     const location = useLocation();
+//     const authenticated = useSelector((state) => state.auth.authenticated)
 
-    if (!authenticated) {
-        return <Navigate to={pageRoutes.login} state={{path: location.pathname}}/>;
-    }
+//     if (!authenticated) {
+//         return <Navigate to={pageRoutes.login} state={{path: location.pathname}}/>;
+//     }
 
-    return children;
-};
+//     return children;
+// };
 
-export default ProtectedRoute;
+// export default ProtectedRoute;
