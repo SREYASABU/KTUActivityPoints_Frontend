@@ -6,4 +6,5 @@ export const pageRoutes = {
     landing: '/',
     login: '/login',
     teacherprofile: '/teacherprofile',
+    studentprofile:'/studentprofile'
 }

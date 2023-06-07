@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from './components/layout/Landing';
 import TeacherProfile from './components/profile/TeacherProfile';
+import StudentProfile from './components/profile/StudentProfile';
 import ProtectedRoute from './utils/ProtectedRoute';
 import { pageRoutes } from './utils/routes';
 import './App.css';
@@ -18,6 +19,7 @@ function App() {
 
                         {/* <Route path={pageRoutes.register} element={<Register/>}/> */}
                         <Route path={pageRoutes.teacherprofile} element={<TeacherProfile/>}/>
+                        <Route path={pageRoutes.studentprofile} element={<StudentProfile/>}/>
                         {/* <Route path={pageRoutes.certificates} element={<ProtectedRoute><Certificates/></ProtectedRoute>}/> */}
                         {/* <Route path="*" element={authenticated ? <Navigate to={pageRoutes.profile}/> : <Login/>}/> */}
                     </Routes>
