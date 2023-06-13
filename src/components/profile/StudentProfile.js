@@ -6,9 +6,11 @@ import { FaPencilAlt } from 'react-icons/fa';
 const data=[["1","12-07-2022","workshop","pdf","approved"],
 ["2","12-07-2022","workshop","pdf","pending"],
 ["3","12-07-2022","workshop","pdf","rejected"],
-["6","12-07-2022","workshop","pdf","approved"],
 ["4","12-07-2022","workshop","pdf","approved"],
-["5","12-07-2022","workshop","pdf","rejected"]]
+["5","12-07-2022","workshop","pdf","approved"],
+["6","12-07-2022","workshop","pdf","rejected"],
+["7","12-07-2022","workshop","pdf","pending"],
+]
 
 
 
@@ -16,7 +18,7 @@ const Profile = () => {
     return (
         <div>
             <Navbar/>
-            <div className="relative flex flex-row items-center bg-gray-50 p-8 mx-16 mt-4 rounded-3xl shadow-md">
+            <div className="font-primary relative flex flex-row items-center bg-gray-50 p-8 mx-16 mt-4 rounded-3xl shadow-md">
                 <img
                     src={teacher}
                     alt="Profile"
@@ -47,7 +49,7 @@ const Profile = () => {
                 
                 </div>
             </div>
-            <div className="bg-gray-50 p-1 shadow-md my-8 mx-2 ">
+            <div className="font-primary bg-gray-50 p-1 shadow-md my-8 mx-2 ">
                 
                 <table className="w-full min-w-max table-auto text-left">         
                 <thead className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
@@ -66,11 +68,33 @@ const Profile = () => {
                     key={index}
                     className={`${index % 2 === 0 ? 'bg-gray-50  p-4' : 'bg-gray-200  '}`}
                   >
-                    {row.map((cell, cellIndex) => (
-                      <td key={cellIndex} className={`${cell==="approved"?'bg-green-200 p-4':cell==="rejected"?'bg-red-200 p-4':cell=="pending"?'bg-blue-200 p-4':''}`}>
+                    {/* {row.map((cell, cellIndex) => (
+                      <td key={cellIndex} className={`${cell==="approved"?'bg-green-200 p-4':cell==="rejected"?'bg-red-200 p-4':cell==="pending"?'bg-yellow-100 p-4':''}`}>
                         {cell}
                       </td>
-                    ))}
+                    ))} */}
+                    {row.map((cell, cellIndex) => (
+        <td key={cellIndex} className="p-4">
+          {cell === 'approved' && (
+            <span className="bg-green-200 px-4 py-0.5 rounded-full text-green-700 text-sm">
+              {cell}
+            </span>
+          )}
+          {cell === 'rejected' && (
+            <span className="bg-red-200 px-4 py-0.5  rounded-full text-red-600 text-sm">
+              {cell}
+            </span>
+          )}
+          {cell === 'pending' && (
+            <span className="bg-yellow-100 px-4 py-0.5  rounded-full text-yellow-600 text-sm">
+              {cell}
+            </span>
+          )}
+          {!(cell === 'approved' || cell === 'rejected' || cell === 'pending') && (
+            <span>{cell}</span>
+          )}
+        </td>
+      ))}
 
                   </tr>
                 ))}

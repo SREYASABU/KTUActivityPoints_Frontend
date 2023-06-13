@@ -8,24 +8,26 @@ const Profile = () => {
     return (
         <div>
             <Navbar/>
-            <div className="relative flex flex-row items-center bg-gray-50 p-8 mx-16 mt-4 rounded-3xl shadow-md">
+            <div className="font-primary relative flex flex-row items-center bg-gray-50 p-8 mx-16 mt-4 rounded-3xl shadow-md">
                 <img
                     src={teacher}
                     alt="Profile"
-                    className="w-36 h-36 rounded-full mr-8 ml-10">
+                    className="w-36 h-36 rounded-full mr-8 ml-10 border-zinc-300 border-solid border-4">
                 </img>
                 {/* <FaPencilAlt
                     className="absolute text-gray-500 top-0 right-0 -mr-1 -mt-1 w-4 h-4 cursor-pointer"
                     aria-label="Change Profile"
                 /> */}
                 <div>
-                    <h1 className="text-2xl font-bold">Prof. Sreya Babu</h1>
-                    <p className="text-gray-700 text-xl">Associate Professor</p>
-                    <div className="grid grid-cols-2 gap-x-14 gap-2 mt-4">
-                        <p className="text-gray-700">Appointed Class: CS6A, EC6B</p>
-                        <p className="text-gray-700">Registration ID: MDL19CS321</p>
-                        <p className="text-gray-700">Qualifications: M.Sc., B.Ed.</p>
-                        <p className="text-gray-700">Department: Computer Science</p>
+                    <h1 className="text-[1.8rem] font-bold">Prof. Sreya Babu</h1>
+                    <p className="text-gray-700 text-xl font-medium -mt-1">Associate Professor</p>
+                    <div className="grid grid-cols-2 gap-x-14 gap-2 mt-5">
+                        <p className="text-gray-500 text-sm">Department: <span className="font-medium text-gray-700 text-base">Computer Science</span></p>
+                        <p className="text-gray-500 text-sm">KTU ID: <span className="font-medium text-gray-700 text-base">KTU1F36</span></p>
+                        {/* <p className="text-gray-700">Contact: 9072721931</p> */}
+                        <p className="text-gray-500 text-sm">Appointed Class: <span className="font-medium text-gray-700 text-base">CS6A</span></p>
+                        <p className="text-gray-500 text-sm">Qualifications: <span className="font-medium text-gray-700 text-base">M.Sc., B.Ed.</span></p>
+                        {/* <p className="text-gray-700">Email: sreyababes@gmail.com</p> */}
                     </div>
                 </div>
                 {/* <button className="flex ml-96 mt-24 bg-slate-200 px-10 py-2 rounded-lg shadow-sm">Edit</button> */}

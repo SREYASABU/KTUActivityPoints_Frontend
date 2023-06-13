@@ -2,7 +2,9 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    fontFamily: {
+      primary: ['Nunito Sans', 'sans-serif']
+    },
   },
   plugins: [],
 }
