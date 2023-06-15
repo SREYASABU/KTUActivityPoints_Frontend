@@ -19,7 +19,7 @@ const Profile = () => {
                     aria-label="Change Profile"
                 /> */}
                 <div>
-                    <h1 className="text-[1.8rem] font-bold">Prof. Sreya Babu</h1>
+                    <h1 className="text-[1.8rem] font-bold">Prof. Sandra Sam</h1>
                     <p className="text-gray-700 text-xl font-medium -mt-1">Associate Professor</p>
                     <div className="grid grid-cols-2 gap-x-14 gap-2 mt-5">
                         <p className="text-gray-500 text-sm">Department: <span className="font-medium text-gray-700 text-base">Computer Science</span></p>
