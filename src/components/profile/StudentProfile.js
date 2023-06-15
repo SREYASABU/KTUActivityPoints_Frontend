@@ -3,6 +3,8 @@ import Navbar from "../layout/Navbar";
 import teacher from '../../assets/teacher.jfif'
 import { FaPencilAlt } from 'react-icons/fa';
 import Modal from './Modal'
+import Progressbar from './Progressbar'
+
 
 const data=[["1","12-07-2022","workshop","pdf","approved"],
 ["2","12-07-2022","workshop","pdf","pending"],
@@ -46,7 +48,7 @@ const Profile = () => {
                     </div>
                 </div>
                 {/* <button className="flex ml-96 mt-24 bg-slate-200 px-10 py-2 rounded-lg shadow-sm">Edit</button> */}
-                <div className="text-gray-500 text-sm absolute top-4 right-6 p-2">Activity points earned:<span className="font-bold text-3xl text-[#fd2d34]">12</span></div>
+                <div className="text-gray-500 text-sm absolute top-4 right-6 p-2"><Progressbar/></div>
                 <div className="absolute bottom-4 right-6 p-2">
                     <Modal/>
                 
