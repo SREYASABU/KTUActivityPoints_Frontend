@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../layout/Navbar";
 import teacher from '../../assets/teacher.jfif'
 import { FaPencilAlt } from 'react-icons/fa';
+import Modal from './Modal'
 
 const data=[["1","12-07-2022","workshop","pdf","approved"],
 ["2","12-07-2022","workshop","pdf","pending"],
@@ -29,7 +30,12 @@ const Profile = () => {
                     aria-label="Change Profile"
                 /> */}
                 <div>
-                    <h1 className="text-[1.8rem] font-bold">Leesa Babe</h1>
+                  <div className="flex items-center"><h1 className="text-[1.8rem] font-bold">Leesa Babe</h1>
+                    <div className="text-gray-500 text-sm p-2">
+                  <button className="flex items-center bg-[#fd2d34] text-white font-bold rounded-full px-2 py-1">
+                    <FaPencilAlt className="mr-0.5 h-4" />
+                    </button></div></div>
+                    
                     {/* <p className="text-gray-700 text-xl">student</p> */}
                     <div className="grid grid-cols-2 gap-x-14 gap-2 mt-4">
                         <p className="text-gray-500 text-sm">Registration ID: <span className="font-medium text-gray-700 text-base">MDL19CS321</span></p>
@@ -42,12 +48,10 @@ const Profile = () => {
                 {/* <button className="flex ml-96 mt-24 bg-slate-200 px-10 py-2 rounded-lg shadow-sm">Edit</button> */}
                 <div className="text-gray-500 text-sm absolute top-4 right-6 p-2">Activity points earned:<span className="font-bold text-3xl text-[#fd2d34]">12</span></div>
                 <div className="absolute bottom-4 right-6 p-2">
-                    <button className="flex items-center bg-[#fd2d34] text-white font-bold rounded-full px-4 py-2">
-                    <FaPencilAlt className="mr-2 h-4" />
-                        Edit
-                    </button>
+                    <Modal/>
                 
                 </div>
+
             </div>
             <div className="font-primary mx-16 bg-gray-50 mb-10 pt-4 px-4">
                 <table className="w-full">         

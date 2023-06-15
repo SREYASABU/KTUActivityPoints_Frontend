@@ -88,7 +88,7 @@ const TabContent = () => {
                     className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-gray-200'}`}
                   >
                     {row.map((cell, cellIndex) => (
-                      <td key={cellIndex} className="px-14 py-4">
+                      <td key={cellIndex} className="px-28 py-4">
                         {cell}
                       </td>
                     ))}
