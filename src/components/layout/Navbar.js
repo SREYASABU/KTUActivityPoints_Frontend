@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import logo from '../../assets/logo.png'
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../Provider';
+import logo from '../../assets/logo.png';
 import axios from 'axios';
+import { pageRoutes } from '../../utils/routes';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -10,30 +13,25 @@ axios.defaults.withCredentials = true;
 
 const Navbar = () =>{
     const [currentUser, setCurrentUser] = useState();
+    const {setUser} = useContext(UserContext)
+
+    const navigate = useNavigate();
 
     const client = axios.create({
-        baseURL: "http://127.0.0.1:8000"
-      });
-      useEffect(() => {
-          client.get("/api/user")
-          .then(function(res) {
-            setCurrentUser(true);
-          })
-          .catch(function(error) {
-            setCurrentUser(false);
-          });
-        }, []);
-      
-      function submitLogout(e) {
-          e.preventDefault();
-          client.post(
-            "/api/logout",
-            {withCredentials: true}
-          ).then(function(res) {
-            setCurrentUser(false);
-          });
-        }
+      baseURL: "http://43.205.228.231:8000"
+    });
 
+    function submitLogout(e) {
+      e.preventDefault();
+      client.post(
+        "/api/logout",
+        {withCredentials: true}
+      ).then(function(res) {
+        setCurrentUser(false);
+        setUser({ user_id: '', role: '', isAuth: false });
+        navigate(pageRoutes.landing);
+      });
+    }
         
     return(
         <div>

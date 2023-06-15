@@ -22,7 +22,6 @@ const Login = () => {
   const [role, setRole] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
 
   function submitLogin(e) {
@@ -62,15 +61,6 @@ const Login = () => {
     }
   }
 
-  function submitLogout(e) {
-    e.preventDefault();
-    client.post(
-      "/api/logout",
-      {withCredentials: true}
-    ).then(function(res) {
-      setCurrentUser(false);
-    });
-  }
 
   useEffect(() => {
     console.log("user after returning from Provider inside Login.js", user);
