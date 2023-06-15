@@ -1,8 +1,7 @@
 import React from 'react';
 import { useState, useEffect, useContext } from 'react';
-import Navbar from '../layout/Navbar';
 import Profile from '../profile/TeacherProfile';
-import Spinner from '../layout/Spinner';
+import StudentProfile from '../profile/StudentProfile'
 import axios from 'axios';
 import image1 from '../../assets/image1.jpg';
 import logo from '../../assets/logo.png';
@@ -13,13 +12,9 @@ axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
-// const client = axios.create({
-//   baseURL: "http://127.0.0.1:8000"
-// });
 const client = axios.create({
   baseURL: "http://43.205.228.231:8000"
 });
-// http://43.205.228.231:8000/api/login
 
 const Login = () => {
   const {user, login,logout, setUser} = useContext(UserContext)
@@ -29,23 +24,10 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // useEffect(() => {
-  //   client.get("/api/user")
-  //   .then(function(res) {
-  //     setCurrentUser(true);
-  //   })
-  //   .catch(function(error) {
-  //     setCurrentUser(false);
-  //   });
-  // }, []);
 
   function submitLogin(e) {
     e.preventDefault();
-    //setIsLoading(true)
-    // console.log("role", role)
-    // console.log("email", email)
-    // console.log("pass", password)
-    if(role == 'teacher'){
+    if(role === 'teacher'){
       client.post(
         "/api/faculty-login",
         {
@@ -55,16 +37,14 @@ const Login = () => {
       ).then(function(res) {
         console.log("Response",res.data['user_id'])
         setCurrentUser(true);
-        //login(res.data['user_id'], 'teacher', true)
-        setUser((user)=>({user_id:res.data['user_id'], role :'teacher', isAuth : true}))
+        setUser((user)=>({...user, user_id:res.data['user_id'], role :'teacher', isAuth : true}))
         console.log("user after returning from Provider inside Login.js",user)
-        //(res.data['user_id'])
       }).catch(function(err) {
         console.log("Error",err)
         
       });
     }else
-    if (role=='student'){
+    if (role==='student'){
         client.post(
           "/api/student-login",
           {
@@ -72,15 +52,14 @@ const Login = () => {
             password: password
           }
         ).then(function(res) {
-          login(res.data['user_id'], 'student')
-          console.log("Response",res)
+          console.log("Response",res.data['user_id'])
           setCurrentUser(true);
+        setUser((user)=>({...user, user_id:res.data['user_id'], role :'student', isAuth : true}))
+        }).catch(function(err){
+          console.log("Error",err)
         });
       
     }
-
-
-    
   }
 
   function submitLogout(e) {
@@ -92,6 +71,10 @@ const Login = () => {
       setCurrentUser(false);
     });
   }
+
+  useEffect(() => {
+    console.log("user after returning from Provider inside Login.js", user);
+  }, [user]);
 
   const handleRoleChange = (e) => {
     setRole(e.target.value);
@@ -109,10 +92,8 @@ const Login = () => {
   if (currentUser){
     return(
       <div>
-  {isLoading ? <Spinner/> : <></>}
-
-        <Navbar/>
-        <Profile/>
+        {role === 'teacher' ? <Profile/> : <></>}
+        {role === 'student' ? <StudentProfile/> : <></>}
       </div>
     )
   }
