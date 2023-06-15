@@ -14,7 +14,7 @@ const App = () => {
 
   return (
     <div className="container mx-auto mt-5 px-3 py-1">
-      <h1 className="text-center font-medium text-gray-700 text-base">Points:{progress}/100</h1>
+      <h1 className="text-center font-medium text-gray-400 text-base">Points:<span className='text-center font-bold text-[#fd2d34] text-base'>{progress}</span>/100</h1>
       <ProgressBar progress={progress} />
     </div>
   );
