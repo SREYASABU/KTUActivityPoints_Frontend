@@ -1,11 +1,12 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
-import Navbar from '../layout/Navbar';
+import { useState, useEffect, useContext } from 'react';
 import Profile from '../profile/TeacherProfile';
-import Spinner from '../layout/Spinner';
+import StudentProfile from '../profile/StudentProfile'
 import axios from 'axios';
 import image1 from '../../assets/image1.jpg';
 import logo from '../../assets/logo.png';
+// import Spinner from '../layout/Spinner'
+import { UserContext } from '../../Provider';
 
 
 axios.defaults.xsrfCookieName = 'csrftoken';
@@ -13,51 +14,70 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
 const client = axios.create({
-  baseURL: "http://127.0.0.1:8000"
+  baseURL: "http://43.205.228.231:8000"
 });
 
 const Login = () => {
-
+  const {user, login, logout, setUser} = useContext(UserContext)
   const [currentUser, setCurrentUser] = useState();
   const [role, setRole] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    client.get("/api/user")
-    .then(function(res) {
-      setCurrentUser(true);
-    })
-    .catch(function(error) {
-      setCurrentUser(false);
-    });
-  }, []);
 
   function submitLogin(e) {
     e.preventDefault();
-    setIsLoading(true)
-    client.post(
-      "/api/login",
-      {
-        role: role,
-        email: email,
-        password: password
-      }
-    ).then(function(res) {
-      setCurrentUser(true);
-    });
+    // setLoading(true);
+    // if(loading){
+    //   return(
+    //   <Spinner/>)
+    // }
+
+    if(role === 'teacher'){
+      client.post(
+        "/api/faculty-login",
+        {
+          email: email,
+          password: password
+        }
+      ).then(function(res) {
+        console.log("Response",res.data['user_id'])
+        console.log(res.data)
+        console.log(user)
+        setCurrentUser(true);
+        setUser((user)=>({...user, user_id:res.data['user_id'], role :'teacher', isAuth : true}))
+        console.log("user after returning from Provider inside Login.js",user)
+      }).catch(function(err) {
+        console.log("Error",err)
+      });
+      // setLoading(false)
+
+    }else
+    if (role==='student'){
+        client.post(
+          "/api/student-login",
+          {
+            email: email,
+            password: password
+          }
+        ).then(function(res) {
+          console.log("Response",res.data['user_id'])
+          setCurrentUser(true);
+        setUser((user)=>({...user, user_id:res.data['user_id'], role :'student', isAuth : true}))
+        }).catch(function(err){
+          console.log("Error",err)
+        });
+      
+    }
   }
 
-  function submitLogout(e) {
-    e.preventDefault();
-    client.post(
-      "/api/logout",
-      {withCredentials: true}
-    ).then(function(res) {
-      setCurrentUser(false);
-    });
-  }
+
+  useEffect(() => {
+    localStorage.setItem("user_id",user["user_id"])
+    localStorage.setItem("role",user["role"])
+    localStorage.setItem("isAuth",user["isAuth"])
+  }, [user]);
 
   const handleRoleChange = (e) => {
     setRole(e.target.value);
@@ -72,13 +92,11 @@ const Login = () => {
     };
 
   
-  if (currentUser){
+  if (localStorage.getItem("role") && localStorage.getItem("isAuth")&&localStorage.getItem("user_id")){
     return(
       <div>
-  {isLoading ? <Spinner/> : <></>}
-
-        <Navbar/>
-        <Profile/>
+        {localStorage.getItem("role")==="teacher"? <Profile/> : <></>}
+        {localStorage.getItem("role")==="student" ? <StudentProfile/> : <></>}
       </div>
     )
   }
