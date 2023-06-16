@@ -4,6 +4,7 @@ import { UserContext } from '../../Provider';
 import logo from '../../assets/logo.png';
 import axios from 'axios';
 import { pageRoutes } from '../../utils/routes';
+import Landing from './Landing';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -23,14 +24,10 @@ const Navbar = () =>{
 
     function submitLogout(e) {
       e.preventDefault();
-      client.post(
-        "/api/logout",
-        {withCredentials: true}
-      ).then(function(res) {
-        setCurrentUser(false);
-        setUser({ user_id: '', role: '', isAuth: false });
-        navigate(pageRoutes.landing);
-      });
+      localStorage.removeItem("user_id")
+      localStorage.removeItem("role")
+      localStorage.removeItem("isAuth")
+      navigate("/")
     }
         
     return(

@@ -5,6 +5,7 @@ import StudentProfile from '../profile/StudentProfile'
 import axios from 'axios';
 import image1 from '../../assets/image1.jpg';
 import logo from '../../assets/logo.png';
+// import Spinner from '../layout/Spinner'
 import { UserContext } from '../../Provider';
 
 
@@ -17,15 +18,22 @@ const client = axios.create({
 });
 
 const Login = () => {
-  const {user, login,logout, setUser} = useContext(UserContext)
+  const {user, login, logout, setUser} = useContext(UserContext)
   const [currentUser, setCurrentUser] = useState();
   const [role, setRole] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // const [loading, setLoading] = useState(false);
 
 
   function submitLogin(e) {
     e.preventDefault();
+    // setLoading(true);
+    // if(loading){
+    //   return(
+    //   <Spinner/>)
+    // }
+
     if(role === 'teacher'){
       client.post(
         "/api/faculty-login",
@@ -35,13 +43,16 @@ const Login = () => {
         }
       ).then(function(res) {
         console.log("Response",res.data['user_id'])
+        console.log(res.data)
+        console.log(user)
         setCurrentUser(true);
         setUser((user)=>({...user, user_id:res.data['user_id'], role :'teacher', isAuth : true}))
         console.log("user after returning from Provider inside Login.js",user)
       }).catch(function(err) {
         console.log("Error",err)
-        
       });
+      // setLoading(false)
+
     }else
     if (role==='student'){
         client.post(
@@ -63,7 +74,9 @@ const Login = () => {
 
 
   useEffect(() => {
-    console.log("user after returning from Provider inside Login.js", user);
+    localStorage.setItem("user_id",user["user_id"])
+    localStorage.setItem("role",user["role"])
+    localStorage.setItem("isAuth",user["isAuth"])
   }, [user]);
 
   const handleRoleChange = (e) => {
@@ -79,11 +92,11 @@ const Login = () => {
     };
 
   
-  if (currentUser){
+  if (localStorage.getItem("role") && localStorage.getItem("isAuth")&&localStorage.getItem("user_id")){
     return(
       <div>
-        {role === 'teacher' ? <Profile/> : <></>}
-        {role === 'student' ? <StudentProfile/> : <></>}
+        {localStorage.getItem("role")==="teacher"? <Profile/> : <></>}
+        {localStorage.getItem("role")==="student" ? <StudentProfile/> : <></>}
       </div>
     )
   }

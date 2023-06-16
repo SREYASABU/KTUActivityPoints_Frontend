@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../layout/Navbar";
 import TabContent from "./TabContent";
 import teacher from '../../assets/teacher.jfif'
 import { FaPencilAlt } from 'react-icons/fa';
+import PdfButton from "./PdfButton";
 
 const Profile = () => {
     return (
@@ -36,6 +37,10 @@ const Profile = () => {
                     <FaPencilAlt className="mr-2 h-4" />
                         Edit
                     </button>
+                    
+                </div>
+                <div className="absolute bottom-6 right-32">
+                    <PdfButton/>
                 </div>
             </div>
             <TabContent/>

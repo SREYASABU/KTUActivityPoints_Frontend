@@ -1,4 +1,6 @@
 import { createContext, useContext, useState  } from "react";
+import { useNavigate } from 'react-router-dom';
+import { pageRoutes } from "./utils/routes";
 
 // @function  UserContext
 const UserContext = createContext({ name: '', auth: false });
@@ -23,18 +25,15 @@ const UserProvider = ({ children }) => {
     console.log("user in provider after login is" , user)
   };
 
+  const navigate = useNavigate();
+
   const logout = () => {
-    // setUser({
-    //   user_id: '',
-    //   auth: false,
-    //   role: ''
-    // });
-    // setUser('');
-    // setRole('')
-    // setIsAuth('Not_Authenticated')
     setUser((user)=>({user_id:'', role :'', isAuth : false}))
+    // setCurrentUser(false);
     console.log("in logout inside provider")
     console.log("user in provider after login is" , user)
+    navigate(pageRoutes.landing);
+
   };
 
   return (

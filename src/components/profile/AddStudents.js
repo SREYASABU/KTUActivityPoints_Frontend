@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const AddStudents = () => {
   const [students, setStudents] = useState([]);
@@ -8,35 +9,41 @@ const AddStudents = () => {
   const [registrationNumber, setRegistrationNumber] = useState('');
 
   const handleAddStudent = () => {
+    // setLoading(true)
+    // setError(null)
+    
     const newStudent = {
-      rollNo,
-      name,
-      email,
-      registrationNumber,
+      user_id:localStorage.getItem("user_id").toString(),
+      username:name,
+      email:email,
+      password:registrationNumber,
     };
+    console.log(newStudent)
 
     setStudents([...students, newStudent]);
     setRollNo('');
     setName('');
     setEmail('');
     setRegistrationNumber('');
+    axios.post("http://43.205.228.231:8000/api/register-student",newStudent)
+    // setLoading(false)
   };
 
   return (
     <div className="p-4">
       <div className="mb-4">
-        <input
+        {/* <input
           className="px-3 py-2 border border-gray-300 rounded mr-2 text-sm"
           type="text"
           placeholder="Roll No"
           value={rollNo}
           onChange={(e) => setRollNo(e.target.value)}
-        />
+        /> */}
 
         <input
           className="px-3 py-2 border border-gray-300 rounded mr-2 text-sm"
           type="text"
-          placeholder="Name"
+          placeholder="Username"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
@@ -52,7 +59,7 @@ const AddStudents = () => {
         <input
           className="px-3 py-2 border border-gray-300 rounded mr-2 text-sm"
           type="text"
-          placeholder="Registration Number"
+          placeholder="Password"
           value={registrationNumber}
           onChange={(e) => setRegistrationNumber(e.target.value)}
         />
@@ -69,7 +76,6 @@ const AddStudents = () => {
         <table className="min-w-full bg-white border border-gray-300">
           <thead className='bg-slate-100'>
             <tr>
-              <th className="px-4 py-2">Roll No</th>
               <th className="px-4 py-2">Name</th>
               <th className="px-4 py-2">Email</th>
               <th className="px-4 py-2">Registration Number</th>
@@ -78,10 +84,9 @@ const AddStudents = () => {
           <tbody>
             {students.map((student, index) => (
               <tr key={index}>
-                <td className="border px-4 py-2">{student.rollNo}</td>
-                <td className="border px-4 py-2">{student.name}</td>
+                <td className="border px-4 py-2">{student.username}</td>
                 <td className="border px-4 py-2">{student.email}</td>
-                <td className="border px-4 py-2">{student.registrationNumber}</td>
+                <td className="border px-4 py-2">{student.password}</td>
               </tr>
             ))}
           </tbody>
