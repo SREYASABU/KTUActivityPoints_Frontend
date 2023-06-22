@@ -16,6 +16,7 @@
     "react-router-dom": "^6.13.0",
     "react-scripts": "^5.0.1",
     "redux": "^4.2.1",
+    "uuid": "^9.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -23,7 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "type":"text/babel"
+    "type": "text/babel"
   },
   "eslintConfig": {
     "extends": [

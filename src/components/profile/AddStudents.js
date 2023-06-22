@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const AddStudents = () => {
+const AddStudents = ({classList,setclassList}) => {
   const [students, setStudents] = useState([]);
   const [rollNo, setRollNo] = useState('');
   const [name, setName] = useState('');
@@ -11,13 +11,16 @@ const AddStudents = () => {
   const handleAddStudent = () => {
     // setLoading(true)
     // setError(null)
-    
     const newStudent = {
       user_id:localStorage.getItem("user_id").toString(),
       username:name,
       email:email,
       password:registrationNumber,
     };
+
+    
+    
+    
     console.log(newStudent)
 
     setStudents([...students, newStudent]);
@@ -25,7 +28,18 @@ const AddStudents = () => {
     setName('');
     setEmail('');
     setRegistrationNumber('');
-    axios.post("http://43.205.228.231:8000/api/register-student",newStudent)
+    axios.post("http://127.0.0.1:8000/api/register-student",newStudent).then(response => {
+
+      if (response.status === 201) {
+        const newStudent1 = [name,email,registrationNumber];
+         setclassList([...classList, newStudent1]);
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
+    
     // setLoading(false)
   };
 

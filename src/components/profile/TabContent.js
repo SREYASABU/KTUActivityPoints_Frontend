@@ -21,15 +21,14 @@ const TabContent = () => {
     ['David Brown', 'ECB', '2024', 'Arts', '.doc'],
   ];
 
-  const data2 = [
-    ['1', 'Abhishek Kurien', '75', '1'],
-    ['2', 'Abin Mathew', '50', '3'],
-    ['3', 'Achyuth Mohan', '40', '0'],
-    ['4', 'Adam Oommen Jacob', '70', '1'],
-    ['5', 'Aditya Anil', '60', '0'],
-    ['6', 'Adithya Kartha', '55', '2'],
-  ]
-  
+const [classList, setclassList] = useState([
+['1', 'Abhishek Kurien', '75', '1'],
+['2', 'Abin Mathew', '50', '3'],
+['3', 'Achyuth Mohan', '40', '0'],
+['4', 'Adam Oommen Jacob', '70', '1'],
+['5', 'Aditya Anil', '60', '0'],
+['6', 'Adithya Kartha', '55', '2'],
+]);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -90,7 +89,7 @@ const TabContent = () => {
                 </tr>
               </thead>
               <tbody>
-                {data2.map((row, index) => (
+                {classList.map((row, index) => (
                   <tr
                     key={index}
                     className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-gray-200'}`}
@@ -122,7 +121,7 @@ const TabContent = () => {
             <div className='flex flex-row justify-between ml-4 -mt-4'>
               <h1 className='font-semibold bg-[#f8d8d9] px-5 py-2 w-52 mb-2 rounded-2xl '>CS6A - Batch of 2024</h1>
             </div>
-            <AddStudents/>
+            <AddStudents classList = {classList} setclassList = {setclassList}/>
           </div>
         );
         // case 'tab5':
